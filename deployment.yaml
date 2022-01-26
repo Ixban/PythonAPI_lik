@@ -1,0 +1,22 @@
+# This file configures the hermes app which serves public web traffic.
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: appname-test-v1
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: appname-test
+  template:
+    metadata:
+      labels:
+        app: appname-test-v1
+    spec:
+      containers:
+      - name: hermes-app
+        # Replace $GCLOUD_PROJECT with your project ID
+        image: gcr.io/proy-v1/appname-test-v1:latest
+        env:
+          - name: PORT
+            value: "80"
